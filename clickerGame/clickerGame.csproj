@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Raylib-cs" Version="7.0.0" />
+    <Content Include="./Assets/karimryde-scaled-400x400.png" CopyToOutputDirectory="Always"/>
+    <Content Include="./Assets/mikaelbergstrom-scaled-400x400.png" CopyToOutputDirectory="Always"/>
+  </ItemGroup>
+
+</Project>

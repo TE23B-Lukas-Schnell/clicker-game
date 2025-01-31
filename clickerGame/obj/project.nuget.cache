@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "E2H630rtQ/c=",
+  "success": true,
+  "projectFilePath": "c:\\Users\\lukas.schnell\\Documents\\programmering 1\\clicker game\\clickerGame\\clickerGame.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lukas.schnell\\.nuget\\packages\\raylib-cs\\7.0.0\\raylib-cs.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
