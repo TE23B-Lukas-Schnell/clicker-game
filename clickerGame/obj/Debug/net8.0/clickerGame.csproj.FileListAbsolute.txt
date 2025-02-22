@@ -22,3 +22,4 @@ c:\Users\lukas.schnell\Documents\programmering 1\clicker game\clickerGame\obj\De
 c:\Users\lukas.schnell\Documents\programmering 1\clicker game\clickerGame\obj\Debug\net8.0\ref\clickerGame.dll
 c:\Users\lukas.schnell\Documents\programmering 1\clicker game\clickerGame\bin\Debug\net8.0\Assets\karimryde-scaled-400x400.png
 c:\Users\lukas.schnell\Documents\programmering 1\clicker game\clickerGame\bin\Debug\net8.0\Assets\mikaelbergstrom-scaled-400x400.png
+c:\Users\lukas.schnell\Documents\programmering 1\clicker game\clickerGame\obj\Debug\net8.0\clickerGame.sourcelink.json
