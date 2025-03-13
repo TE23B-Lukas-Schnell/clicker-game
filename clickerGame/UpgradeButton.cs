@@ -36,6 +36,8 @@ abstract public class UpgradeButton : ClickableObject
     public void drawUpgrade()
     {
         Raylib.DrawRectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y, new Color(255, 255, 255));
+
+        if (showHitboxes()) Raylib.DrawRectangleRec(GetHitbox(), Color.Red);
         Raylib.DrawText($"{upgradeDisplayName}", (int)position.X + textOffset, (int)position.Y - textOffset - textSize, textSize, Color.Black);
         Raylib.DrawText($"level: {upgradeNumber}", (int)position.X + textOffset, (int)position.Y + textOffset, textSize, Color.Black);
         Raylib.DrawText($"cost: {currentCost}", (int)position.X + textOffset, (int)position.Y + textSize + textOffset, textSize, Color.Black);

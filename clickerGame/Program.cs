@@ -2,7 +2,7 @@
 global using System.Numerics;
 
 Raylib.InitWindow(1600, 900, "Game");
-Raylib.SetTargetFPS(60);
+Raylib.SetTargetFPS(120);
 
 Image karimImage = Raylib.LoadImage(@"./Assets/karimryde-scaled-400x400.png");
 Image mikaelImage = Raylib.LoadImage(@"./Assets/mikaelbergstrom-scaled-400x400.png");
@@ -16,6 +16,10 @@ clickIncreaseUpgrade mikaelIncreaseUpgrade = new clickIncreaseUpgrade(mikael);
 clickMultiplierUpgrade karimMultiplierUpgrade = new clickMultiplierUpgrade(karim);
 clickMultiplierUpgrade mikaelMultiplierUpgrade = new clickMultiplierUpgrade(mikael);
 
+autoClickerUpgrade karimAutoClickerUpgrade = new autoClickerUpgrade(karim);
+autoClickerUpgrade mikaelAutoClickerUpgrade = new autoClickerUpgrade(mikael);
+
+
 while (!Raylib.WindowShouldClose())
 {
     Raylib.BeginDrawing();
@@ -27,8 +31,8 @@ while (!Raylib.WindowShouldClose())
         ClickableObject.gamelist[i].Draw();
     }
 
-    Raylib.DrawText("VS", (Raylib.GetScreenWidth() / 2) - 20, Raylib.GetScreenHeight() / 2, 70, Color.Black);
-    Raylib.DrawText($"mus:{Raylib.GetMousePosition()}", 0, 0, 50, Color.Black);
+    Raylib.DrawText("VS", (Raylib.GetScreenWidth() / 2)-60, Raylib.GetScreenHeight() / 2, 80, Color.Black);
+    Raylib.DrawText($"mus:{Raylib.GetMousePosition()}", 0, 0, 20, Color.Black);
 
     Raylib.EndDrawing();
 }

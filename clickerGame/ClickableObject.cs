@@ -9,7 +9,6 @@ abstract public class ClickableObject
     public Rectangle GetHitbox() => new Rectangle(position, size); 
     public bool MouseHover() => Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), GetHitbox());
     public bool ClickedOn() => MouseHover() && Raylib.IsMouseButtonPressed(MouseButton.Left);
-    
 
     //körs varje frame och uppdaterar värderna
     abstract public void Update();
