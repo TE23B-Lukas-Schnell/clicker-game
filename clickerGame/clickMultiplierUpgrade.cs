@@ -1,12 +1,11 @@
-public class clickIncreaseUpgrade : UpgradeButton
+public class clickMultiplierUpgrade : UpgradeButton
 {
-    
     public override void Update()
     {
         if (ClickedOn() && buttonReference.clickValue >= currentCost)
         {
             upgradePurchased();
-            buttonReference.clickIncrease++;
+            buttonReference.clickMultiplier++;
         }
     }
 
@@ -15,10 +14,12 @@ public class clickIncreaseUpgrade : UpgradeButton
         drawUpgrade();
     }
 
-    public clickIncreaseUpgrade(ClickerButton buttonReference)
+    public clickMultiplierUpgrade(ClickerButton buttonReference)
     {
-        upgradeDisplayName = "Additive";
-        upgradeRow = 1;
+        baseCost = 50;
+        costMultiplier = 20f;
+        upgradeRow = 2;
+        upgradeDisplayName = "Multiplier";
         instantiateUpgrade(buttonReference, upgradeRow);
     }
 }
