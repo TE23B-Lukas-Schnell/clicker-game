@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lukas.schnell\\Documents\\programmering 1\\clicker game\\clickerGame\\clickerGame.csproj": {}
+    "c:\\Users\\lukas.schnell\\Documents\\programmering 1\\clicker game\\clickerGame\\clickerGame.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lukas.schnell\\Documents\\programmering 1\\clicker game\\clickerGame\\clickerGame.csproj": {
+    "c:\\Users\\lukas.schnell\\Documents\\programmering 1\\clicker game\\clickerGame\\clickerGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lukas.schnell\\Documents\\programmering 1\\clicker game\\clickerGame\\clickerGame.csproj",
+        "projectUniqueName": "c:\\Users\\lukas.schnell\\Documents\\programmering 1\\clicker game\\clickerGame\\clickerGame.csproj",
         "projectName": "clickerGame",
-        "projectPath": "C:\\Users\\lukas.schnell\\Documents\\programmering 1\\clicker game\\clickerGame\\clickerGame.csproj",
+        "projectPath": "c:\\Users\\lukas.schnell\\Documents\\programmering 1\\clicker game\\clickerGame\\clickerGame.csproj",
         "packagesPath": "C:\\Users\\lukas.schnell\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lukas.schnell\\Documents\\programmering 1\\clicker game\\clickerGame\\obj\\",
+        "outputPath": "c:\\Users\\lukas.schnell\\Documents\\programmering 1\\clicker game\\clickerGame\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lukas.schnell\\AppData\\Roaming\\NuGet\\NuGet.Config"
