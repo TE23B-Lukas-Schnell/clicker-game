@@ -4,7 +4,7 @@ class autoClickerUpgrade : UpgradeButton{
         if (ClickedOn() && buttonReference.clickValue >= currentCost)
         {
             upgradePurchased();
-            buttonReference.spawnClicker();
+            buttonReference.SpawnAutoClicker();
         }
     }
 
@@ -16,9 +16,9 @@ class autoClickerUpgrade : UpgradeButton{
     public autoClickerUpgrade(ClickerButton buttonReference)
     {
         baseCost = 60;
-        costMultiplier = 1.3f;
+        costMultiplier = 0.8f;
         upgradeRow = 3;
-        upgradeDisplayName = "Auto clicker";
+        upgradeDisplayName = "Generators";
         instantiateUpgrade(buttonReference, upgradeRow);
     }
 }

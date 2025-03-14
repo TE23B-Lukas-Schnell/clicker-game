@@ -34,8 +34,8 @@ public class ClickerButton : ClickableObject
     public override void Draw()
     {
         DrawButton(texture);
-        Raylib.DrawText($"{clickValueName}: {clickValue}", (int)(position.X + size.X * 0.25f), (int)position.Y - textSize, textSize, Color.Black);
-        AutoClicker.UpdateTime();
+        Raylib.DrawText($"{clickValueName}", (int)(position.X + size.X * 0.3f), (int)position.Y - textSize * 2, textSize, Color.Black);
+        Raylib.DrawText($"{clickValue}", (int)(position.X + size.X * 0.3f), (int)position.Y - textSize, textSize, Color.Black);
         // loops through all autoclickers
         for (int i = 0; i < AutoClicker.AutoClickers.Count; i++)
         {
@@ -47,20 +47,14 @@ public class ClickerButton : ClickableObject
     {
         public static List<AutoClicker> AutoClickers = new List<AutoClicker>();
 
-        public float clickTime = 0;
-        public float timeBetweenClicks = 120 * 10;
-
-        public static void UpdateTime()
-        {
-            // clickTime--;
-        }
-
-        public float autoClickerclickIncrease = 1;
-        public float autoClickerclickMultiplier = 1;
-
         public Vector2 position;
         public Vector2 size;
         public ClickerButton buttonReference;
+
+        public float clickTime = 0;
+        public float timeBetweenClicks = 120 * 10;
+        public float autoClickerclickIncrease = 1;
+        public float autoClickerclickMultiplier = 1;
 
         public void Update()
         {
@@ -74,7 +68,7 @@ public class ClickerButton : ClickableObject
         public void Draw()
         {
             byte colorValue = (byte)(255 * (clickTime / timeBetweenClicks));
-            Color autoClickerColor = new Color((byte)(255 - colorValue), (byte)(colorValue), (byte)0, (byte)255);
+            Color autoClickerColor = new Color((byte)(255 - colorValue), (byte)(colorValue), (byte)0, (byte)100);
             Raylib.DrawRectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y, autoClickerColor);
         }
 
@@ -82,9 +76,7 @@ public class ClickerButton : ClickableObject
         {
             this.buttonReference = buttonReference;
 
-            this.size = new Vector2(buttonReference.size.X * 0.1f, buttonReference.size.Y * 0.1f);
-
-            // this.position = buttonReference.position;
+            this.size = new Vector2(buttonReference.size.X / 10, buttonReference.size.Y / 10);
 
             if (AutoClickers.Count == null)
             {
@@ -92,31 +84,33 @@ public class ClickerButton : ClickableObject
             }
             else
             {
-                this.position = buttonReference.position + new Vector2(AutoClickers.Count * size.X, 0);
+                float autoClickerColumn = AutoClickers.Count % 10; // everytime autoclikers.count is the sizedivider value it decreases back to 0
+                float autoClickerRow = AutoClickers.Count / 10;
+                this.position = buttonReference.position + new Vector2(autoClickerColumn * size.X, autoClickerRow * size.Y);
             }
-
-            /* if (AutoClickers.Count == 0)
-             {
-                 this.position = buttonReference.position;
-             }
-             else if (AutoClickers[AutoClickers.Count].position.X <= buttonReference.position.X + buttonReference.size.X && AutoClickers[AutoClickers.Count].position.Y <= buttonReference.position.Y + buttonReference.size.Y)
-             {
-                 this.position = buttonReference.position + new Vector2(size.X * 2 * AutoClickers.Count, 0);
-
-             }
-             else if (AutoClickers[AutoClickers.Count].position.X >= buttonReference.position.X + buttonReference.size.X && AutoClickers[AutoClickers.Count].position.Y <= buttonReference.position.Y + buttonReference.size.Y)
-             {
-                 this.position = buttonReference.position + new Vector2(buttonReference.position.X + buttonReference.size.X, size.Y * 2 * AutoClickers.Count);
-             }
-            */
-
             AutoClickers.Add(this);
         }
     }
 
-    public void spawnClicker()
+    public int GetAutoclickerLength() => AutoClicker.AutoClickers.Count;
+
+    public void SpawnAutoClicker()
     {
         new AutoClicker(this);
+    }
+    public void AutoClickerIncreaseUpgrade()
+    {
+        for (int i = 0; i < AutoClicker.AutoClickers.Count; i++)
+        {
+            AutoClicker.AutoClickers[i].autoClickerclickIncrease++;
+        }
+    }
+    public void AutoClickerMultiplierUpgrade()
+    {
+        for (int i = 0; i < AutoClicker.AutoClickers.Count; i++)
+        {
+            AutoClicker.AutoClickers[i].autoClickerclickMultiplier++;
+        }
     }
 
     public ClickerButton(Vector2 position, string importantValueName, Image sprite, KeyboardKey button)

@@ -7,26 +7,26 @@ abstract public class UpgradeButton : ClickableObject
     public int upgradeRow;
 
     public float baseCost = 20;
-    public float costMultiplier = 10f;
-    public double currentCost;
+    public float costMultiplier = 1f;
+    public float currentCost;
     public ClickerButton buttonReference;
-    public double upgradeCostIncrease(float baseCost, float costMultiplier, double latestCost)
-    => + baseCost + Math.Pow((costMultiplier *  latestCost), 1.1f);
-    
+    public float upgradeCostIncrease(float baseCost, float costMultiplier, float latestCost) 
+    => (float)(baseCost + Math.Pow(costMultiplier * latestCost, 1.1f));
 
-    public void upgradePurchased() // båt
+
+    public void upgradePurchased() // båt från Kevin
     {
-        buttonReference.clickValue -= (float)currentCost;
+        buttonReference.clickValue -= currentCost;
         upgradeNumber++;
-        currentCost = (int)upgradeCostIncrease(baseCost, costMultiplier, currentCost);
+        currentCost = MathF.Round(upgradeCostIncrease(baseCost, costMultiplier, currentCost));
     }
 
     public void instantiateUpgrade(ClickerButton buttonReference, int upgradeRow)
     {
         currentCost = baseCost;
-        size.X = 200 + textOffset;
+        size.X = 220 + textOffset;
         size.Y = textSize * 2 + textOffset * 2;
-        position.Y = Raylib.GetScreenHeight() * upgradeRow / 5;
+        position.Y = Raylib.GetScreenHeight() * upgradeRow / 6 - buttonReference.size.Y/4;
 
         if (buttonReference.position.X < Raylib.GetScreenWidth() / 2) position.X = 0;
         else position.X = Raylib.GetScreenWidth() - size.X;
