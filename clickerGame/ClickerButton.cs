@@ -25,7 +25,7 @@ public class ClickerButton : ClickableObject
         {
             clickValue += CalculateValuePerClick(clickIncrease, clickMultiplier);
         }
-         for (int i = 0; i < AutoClicker.AutoClickers.Count; i++)
+        for (int i = 0; i < AutoClicker.AutoClickers.Count; i++)
         {
             AutoClicker.AutoClickers[i].Update();
         }
@@ -35,6 +35,7 @@ public class ClickerButton : ClickableObject
     {
         DrawButton(texture);
         Raylib.DrawText($"{clickValueName}: {clickValue}", (int)(position.X + size.X * 0.25f), (int)position.Y - textSize, textSize, Color.Black);
+        AutoClicker.UpdateTime();
         // loops through all autoclickers
         for (int i = 0; i < AutoClicker.AutoClickers.Count; i++)
         {
@@ -46,8 +47,13 @@ public class ClickerButton : ClickableObject
     {
         public static List<AutoClicker> AutoClickers = new List<AutoClicker>();
 
-        public static float clickTime = 0;
-        public static float timeBetweenClicks = 120 * 10;
+        public float clickTime = 0;
+        public float timeBetweenClicks = 120 * 10;
+
+        public static void UpdateTime()
+        {
+            // clickTime--;
+        }
 
         public float autoClickerclickIncrease = 1;
         public float autoClickerclickMultiplier = 1;
@@ -55,7 +61,7 @@ public class ClickerButton : ClickableObject
         public Vector2 position;
         public Vector2 size;
         public ClickerButton buttonReference;
-        
+
         public void Update()
         {
             clickTime--;
@@ -76,9 +82,18 @@ public class ClickerButton : ClickableObject
         {
             this.buttonReference = buttonReference;
 
-            this.size = new Vector2(30, 30);
+            this.size = new Vector2(buttonReference.size.X * 0.1f, buttonReference.size.Y * 0.1f);
 
-            this.position = buttonReference.position;
+            // this.position = buttonReference.position;
+
+            if (AutoClickers.Count == null)
+            {
+                this.position = buttonReference.position;
+            }
+            else
+            {
+                this.position = buttonReference.position + new Vector2(AutoClickers.Count * size.X, 0);
+            }
 
             /* if (AutoClickers.Count == 0)
              {
@@ -93,7 +108,7 @@ public class ClickerButton : ClickableObject
              {
                  this.position = buttonReference.position + new Vector2(buttonReference.position.X + buttonReference.size.X, size.Y * 2 * AutoClickers.Count);
              }
- */
+            */
 
             AutoClickers.Add(this);
         }

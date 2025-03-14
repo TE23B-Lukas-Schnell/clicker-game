@@ -16,7 +16,7 @@ class autoClickerUpgrade : UpgradeButton{
     public autoClickerUpgrade(ClickerButton buttonReference)
     {
         baseCost = 60;
-        costMultiplier = 30f;
+        costMultiplier = 1.3f;
         upgradeRow = 3;
         upgradeDisplayName = "Auto clicker";
         instantiateUpgrade(buttonReference, upgradeRow);

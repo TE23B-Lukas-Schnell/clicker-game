@@ -1,6 +1,6 @@
 public class clickIncreaseUpgrade : UpgradeButton
 {
-    
+
     public override void Update()
     {
         if (ClickedOn() && buttonReference.clickValue >= currentCost)
@@ -17,6 +17,8 @@ public class clickIncreaseUpgrade : UpgradeButton
 
     public clickIncreaseUpgrade(ClickerButton buttonReference)
     {
+        baseCost = 20;
+        costMultiplier = 0.8f;
         upgradeDisplayName = "Additive";
         upgradeRow = 1;
         instantiateUpgrade(buttonReference, upgradeRow);

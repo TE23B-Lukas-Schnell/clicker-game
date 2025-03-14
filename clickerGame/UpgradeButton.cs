@@ -10,15 +10,15 @@ abstract public class UpgradeButton : ClickableObject
     public float costMultiplier = 10f;
     public double currentCost;
     public ClickerButton buttonReference;
-    public double upgradeCostIncrease(float baseCost, float costMultiplier, int upgradeNumber)
-    => baseCost + (upgradeNumber - 1) * costMultiplier + Math.Pow(costMultiplier * (upgradeNumber - 1), 1.3f);
-    // f(x,y) = k + y(x-1) + y(x-1)^1.3
+    public double upgradeCostIncrease(float baseCost, float costMultiplier, double latestCost)
+    => + baseCost + Math.Pow((costMultiplier *  latestCost), 1.1f);
+    
 
     public void upgradePurchased() // båt
     {
         buttonReference.clickValue -= (float)currentCost;
         upgradeNumber++;
-        currentCost = (int)upgradeCostIncrease(baseCost, costMultiplier, upgradeNumber);
+        currentCost = (int)upgradeCostIncrease(baseCost, costMultiplier, currentCost);
     }
 
     public void instantiateUpgrade(ClickerButton buttonReference, int upgradeRow)
