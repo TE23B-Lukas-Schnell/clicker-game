@@ -7,9 +7,10 @@ public class ClickerButton : ClickableObject
     public readonly int textSize = 50;
     public Texture2D texture;
     public KeyboardKey button;
-    public void valueIncrease() //this is supposed to run whenever you click the button
+
+    public float CalculateValuePerClick(float clickIncrease, float clickMultiplier)
     {
-        clickValue += clickIncrease * clickMultiplier;
+        return clickIncrease * clickMultiplier;
     }
 
     public void DrawButton(Texture2D texture)
@@ -22,7 +23,11 @@ public class ClickerButton : ClickableObject
     {
         if (ClickedOn() || Raylib.IsKeyPressed(button))
         {
-            valueIncrease();
+            clickValue += CalculateValuePerClick(clickIncrease, clickMultiplier);
+        }
+         for (int i = 0; i < AutoClicker.AutoClickers.Count; i++)
+        {
+            AutoClicker.AutoClickers[i].Update();
         }
     }
 
@@ -30,9 +35,9 @@ public class ClickerButton : ClickableObject
     {
         DrawButton(texture);
         Raylib.DrawText($"{clickValueName}: {clickValue}", (int)(position.X + size.X * 0.25f), (int)position.Y - textSize, textSize, Color.Black);
+        // loops through all autoclickers
         for (int i = 0; i < AutoClicker.AutoClickers.Count; i++)
         {
-            AutoClicker.AutoClickers[i].Update();
             AutoClicker.AutoClickers[i].Draw();
         }
     }
@@ -41,28 +46,30 @@ public class ClickerButton : ClickableObject
     {
         public static List<AutoClicker> AutoClickers = new List<AutoClicker>();
 
+        public static float clickTime = 0;
+        public static float timeBetweenClicks = 120 * 10;
 
+        public float autoClickerclickIncrease = 1;
+        public float autoClickerclickMultiplier = 1;
 
         public Vector2 position;
         public Vector2 size;
         public ClickerButton buttonReference;
-
-        public float timeBetweenClicks = 0;
-        public float clickTimeInFrames = 120 * 5;
-
+        
         public void Update()
         {
-            timeBetweenClicks--;
-            if (timeBetweenClicks <= 0)
+            clickTime--;
+            if (clickTime <= 0)
             {
-                timeBetweenClicks = clickTimeInFrames;
-                buttonReference.valueIncrease();
+                clickTime = timeBetweenClicks;
+                buttonReference.clickValue += buttonReference.CalculateValuePerClick(autoClickerclickIncrease, autoClickerclickMultiplier);
             }
         }
         public void Draw()
         {
-            // byte colorMultiplier = 
-            Raylib.DrawRectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y, new Color((byte)60,(byte)120,(byte)timeBetweenClicks/2));
+            byte colorValue = (byte)(255 * (clickTime / timeBetweenClicks));
+            Color autoClickerColor = new Color((byte)(255 - colorValue), (byte)(colorValue), (byte)0, (byte)255);
+            Raylib.DrawRectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y, autoClickerColor);
         }
 
         public AutoClicker(ClickerButton buttonReference)
@@ -87,8 +94,6 @@ public class ClickerButton : ClickableObject
                  this.position = buttonReference.position + new Vector2(buttonReference.position.X + buttonReference.size.X, size.Y * 2 * AutoClickers.Count);
              }
  */
-
-
 
             AutoClickers.Add(this);
         }
