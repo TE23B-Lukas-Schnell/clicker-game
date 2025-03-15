@@ -7,10 +7,11 @@ public class ClickerButton : ClickableObject
     public readonly int textSize = 50;
     public Texture2D texture;
     public KeyboardKey button;
+    public List<AutoClicker> AutoClickersList = new List<AutoClicker>();
 
     public float CalculateValuePerClick(float clickIncrease, float clickMultiplier)
     {
-        return clickIncrease * clickMultiplier;
+        return MathF.Pow(clickIncrease, clickMultiplier);
     }
 
     public void DrawButton(Texture2D texture)
@@ -19,34 +20,8 @@ public class ClickerButton : ClickableObject
         if (showHitboxes()) Raylib.DrawRectangleRec(GetHitbox(), Color.Red);
     }
 
-    public override void Update()
-    {
-        if (ClickedOn() || Raylib.IsKeyPressed(button))
-        {
-            clickValue += CalculateValuePerClick(clickIncrease, clickMultiplier);
-        }
-        for (int i = 0; i < AutoClicker.AutoClickers.Count; i++)
-        {
-            AutoClicker.AutoClickers[i].Update();
-        }
-    }
-
-    public override void Draw()
-    {
-        DrawButton(texture);
-        Raylib.DrawText($"{clickValueName}", (int)(position.X + size.X * 0.3f), (int)position.Y - textSize * 2, textSize, Color.Black);
-        Raylib.DrawText($"{clickValue}", (int)(position.X + size.X * 0.3f), (int)position.Y - textSize, textSize, Color.Black);
-        // loops through all autoclickers
-        for (int i = 0; i < AutoClicker.AutoClickers.Count; i++)
-        {
-            AutoClicker.AutoClickers[i].Draw();
-        }
-    }
-
     public class AutoClicker
     {
-        public static List<AutoClicker> AutoClickers = new List<AutoClicker>();
-
         public Vector2 position;
         public Vector2 size;
         public ClickerButton buttonReference;
@@ -78,38 +53,69 @@ public class ClickerButton : ClickableObject
 
             this.size = new Vector2(buttonReference.size.X / 10, buttonReference.size.Y / 10);
 
-            if (AutoClickers.Count == null)
+            if (buttonReference.AutoClickersList.Count == null)
             {
                 this.position = buttonReference.position;
             }
             else
             {
-                float autoClickerColumn = AutoClickers.Count % 10; // everytime autoclikers.count is the sizedivider value it decreases back to 0
-                float autoClickerRow = AutoClickers.Count / 10;
+                float autoClickerColumn = buttonReference.AutoClickersList.Count % 10; // everytime autoclikers.count is 10 it decreases back to 0
+                float autoClickerRow = buttonReference.AutoClickersList.Count / 10;
                 this.position = buttonReference.position + new Vector2(autoClickerColumn * size.X, autoClickerRow * size.Y);
             }
-            AutoClickers.Add(this);
+            buttonReference.AutoClickersList.Add(this);
         }
     }
 
-    public int GetAutoclickerLength() => AutoClicker.AutoClickers.Count;
+    public int GetAutoclickerLength() => AutoClickersList.Count;
 
-    public void SpawnAutoClicker()
+    public void SpawnAutoClicker(int amountToSpawn)
     {
-        new AutoClicker(this);
+        for (int i = 0; i < amountToSpawn; i++) new AutoClicker(this);
     }
-    public void AutoClickerIncreaseUpgrade()
+    public void AutoClickerIncreaseUpgrade(float increaseValue)
     {
-        for (int i = 0; i < AutoClicker.AutoClickers.Count; i++)
+        for (int i = 0; i < AutoClickersList.Count; i++)
         {
-            AutoClicker.AutoClickers[i].autoClickerclickIncrease++;
+            AutoClickersList[i].autoClickerclickIncrease += increaseValue;
         }
     }
-    public void AutoClickerMultiplierUpgrade()
+    public void AutoClickerMultiplierUpgrade(float multiplierValue)
     {
-        for (int i = 0; i < AutoClicker.AutoClickers.Count; i++)
+        for (int i = 0; i < AutoClickersList.Count; i++)
         {
-            AutoClicker.AutoClickers[i].autoClickerclickMultiplier++;
+            AutoClickersList[i].autoClickerclickMultiplier += multiplierValue;
+        }
+    }
+    public void AutoClickerTimeUpgrade(float timeDecreaseCoefficient, float timeDecreaseExponent)
+    {
+        for (int i = 0; i < AutoClickersList.Count; i++)
+        {
+            AutoClickersList[i].timeBetweenClicks *= MathF.Pow(timeDecreaseCoefficient, timeDecreaseExponent);
+        }
+    }
+
+    public override void Update()
+    {
+        if (ClickedOn() || Raylib.IsKeyPressed(button))
+        {
+            clickValue += CalculateValuePerClick(clickIncrease, clickMultiplier);
+        }
+        for (int i = 0; i < AutoClickersList.Count; i++)
+        {
+            AutoClickersList[i].Update();
+        }
+    }
+
+    public override void Draw()
+    {
+        DrawButton(texture);
+        Raylib.DrawText($"{clickValueName}", (int)(position.X + size.X * 0.3f), (int)position.Y - textSize * 2, textSize, Color.Black);
+        Raylib.DrawText($"{clickValue}", (int)(position.X + size.X * 0.3f), (int)position.Y - textSize, textSize, Color.Black);
+        // loops through all autoclickers
+        for (int i = 0; i < AutoClickersList.Count; i++)
+        {
+            AutoClickersList[i].Draw();
         }
     }
 

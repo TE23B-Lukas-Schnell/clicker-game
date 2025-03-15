@@ -1,4 +1,4 @@
-class AutoClickerIncreaseUpgrade : UpgradeButton
+class AutoClickerTimeUpgrade : UpgradeButton
 {
     public override void Update()
     {
@@ -7,7 +7,7 @@ class AutoClickerIncreaseUpgrade : UpgradeButton
             if (ClickedOn() && buttonReference.clickValue >= currentCost)
             {
                 upgradePurchased();
-                buttonReference.AutoClickerIncreaseUpgrade(1);
+                buttonReference.AutoClickerTimeUpgrade(0.9f,upgradeNumber);
             }
         }
     }
@@ -18,12 +18,12 @@ class AutoClickerIncreaseUpgrade : UpgradeButton
             drawUpgrade();
     }
 
-    public AutoClickerIncreaseUpgrade(ClickerButton buttonReference)
+    public AutoClickerTimeUpgrade(ClickerButton buttonReference)
     {
-        baseCost = 10;
-        costMultiplier = 1.4f;
-        upgradeRow = 4;
-        upgradeDisplayName = "Gen. add";
+        baseCost = 100;
+        costMultiplier = 0.8f;
+        upgradeRow = 6;
+        upgradeDisplayName = "Gen. speed";
         instantiateUpgrade(buttonReference, upgradeRow);
     }
 }

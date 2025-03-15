@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("clickerGame")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cbf3c85b270347a2dc8d1eff8e767f899aed8484")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0bc4f1626a557120addd26e6ae14152e58b17bb4")]
 [assembly: System.Reflection.AssemblyProductAttribute("clickerGame")]
 [assembly: System.Reflection.AssemblyTitleAttribute("clickerGame")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

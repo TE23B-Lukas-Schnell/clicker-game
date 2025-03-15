@@ -4,7 +4,7 @@ class autoClickerUpgrade : UpgradeButton{
         if (ClickedOn() && buttonReference.clickValue >= currentCost)
         {
             upgradePurchased();
-            buttonReference.SpawnAutoClicker();
+            buttonReference.SpawnAutoClicker(1);
         }
     }
 

@@ -25,6 +25,10 @@ new AutoClickerIncreaseUpgrade(mikael);
 new AutoClickerMultiplierUpgrade(karim);
 new AutoClickerMultiplierUpgrade(mikael);
 
+new AutoClickerTimeUpgrade(karim);
+new AutoClickerTimeUpgrade(mikael);
+
+
 while (!Raylib.WindowShouldClose())
 {
     Raylib.BeginDrawing();
@@ -37,7 +41,6 @@ while (!Raylib.WindowShouldClose())
     }
 
     Raylib.DrawText("VS", (Raylib.GetScreenWidth() / 2) - 50, Raylib.GetScreenHeight() / 3 + 50, 80, Color.Black);
-    // Raylib.DrawText($"mus:{Raylib.GetMousePosition()}", 0, 0, 20, Color.Black);
 
     Raylib.EndDrawing();
 }
