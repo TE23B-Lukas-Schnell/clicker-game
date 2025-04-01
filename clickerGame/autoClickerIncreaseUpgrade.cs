@@ -20,6 +20,7 @@ class AutoClickerIncreaseUpgrade : UpgradeButton
 
     public AutoClickerIncreaseUpgrade(ClickerButton buttonReference)
     {
+        placeInList = 4;
         baseCost = 10;
         costMultiplier = 1.4f;
         upgradeRow = 4;

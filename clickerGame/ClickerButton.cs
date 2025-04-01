@@ -2,16 +2,28 @@ public class ClickerButton : ClickableObject
 {
     public float clickValue = 0;
     public string clickValueName;
-    public float clickIncrease = 1; // this value is added every time you click
-    public float clickMultiplier = 1; // this value is multiplied by the clickIncrease 
+    public float clickIncrease = 1;
+    public float clickMultiplier = 1;
     public readonly int textSize = 50;
     public Texture2D texture;
     public KeyboardKey button;
     public List<AutoClicker> AutoClickersList = new List<AutoClicker>();
 
+    /// <summary>
+    /// the savedata is stored in integers
+    /// the first value is the amount of båtar/köttar
+    /// the second value is the additive upgrade upgradeNumber
+    /// the third value is the multiplier upgrade upgradeNumber
+    /// the fourth value is the generator upgrade upgradeNumber
+    /// the fifth value is the generator additive upgrade upgradeNumber
+    /// the sixth value is the generator multiplier upgrade upgradeNumber
+    /// the seventh value is the generator speed upgrade upgradeNumber
+    /// </summary>
+    public int[] savedata = [0, 0, 0, 0, 0, 0, 0];
+
     public float CalculateValuePerClick(float clickIncrease, float clickMultiplier)
     {
-        return MathF.Pow(clickIncrease, clickMultiplier);
+        return MathF.Round(clickIncrease * MathF.Pow(clickMultiplier, 1.2f));
     }
 
     public void DrawButton(Texture2D texture)
@@ -101,10 +113,13 @@ public class ClickerButton : ClickableObject
         {
             clickValue += CalculateValuePerClick(clickIncrease, clickMultiplier);
         }
+
         for (int i = 0; i < AutoClickersList.Count; i++)
         {
             AutoClickersList[i].Update();
         }
+
+        savedata[0] = (int)MathF.Round(clickValue);
     }
 
     public override void Draw()
@@ -119,14 +134,21 @@ public class ClickerButton : ClickableObject
         }
     }
 
-    public ClickerButton(Vector2 position, string importantValueName, Image sprite, KeyboardKey button)
+    public ClickerButton(string importantValueName, Image sprite, KeyboardKey button)
     {
-        this.position = position;
-        this.clickValueName = importantValueName;
+        clickValueName = importantValueName;
         size.X = sprite.Width;
         size.Y = sprite.Height;
         gamelist.Add(this);
         texture = Raylib.LoadTextureFromImage(sprite);
         this.button = button;
+        if (importantValueName.ToLower() == "båtar")
+        {
+            this.position = new Vector2(Raylib.GetScreenWidth() * 0.3f - sprite.Width / 2, Raylib.GetScreenHeight() / 5);
+        }
+        else if (importantValueName.ToLower() == "köttar")
+        {
+            this.position = new Vector2(Raylib.GetScreenWidth() * 0.7f - sprite.Width / 2, Raylib.GetScreenHeight() / 5);
+        }
     }
 }

@@ -20,6 +20,7 @@ class AutoClickerTimeUpgrade : UpgradeButton
 
     public AutoClickerTimeUpgrade(ClickerButton buttonReference)
     {
+        placeInList = 6;
         baseCost = 100;
         costMultiplier = 0.8f;
         upgradeRow = 6;

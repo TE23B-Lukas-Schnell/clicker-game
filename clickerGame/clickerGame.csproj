@@ -11,6 +11,10 @@
     <PackageReference Include="Raylib-cs" Version="7.0.0" />
     <Content Include="./Assets/karimryde-scaled-400x400.png" CopyToOutputDirectory="Always"/>
     <Content Include="./Assets/mikaelbergstrom-scaled-400x400.png" CopyToOutputDirectory="Always"/>
+    <Content Include="karimSave.txt" CopyToOutputDirectory="Always"/>
+    <Content Include="mickeSave.txt" CopyToOutputDirectory="Always"/>
+    <Content Include="save.json" CopyToOutputDirectory="Always"/>
+
   </ItemGroup>
 
 </Project>

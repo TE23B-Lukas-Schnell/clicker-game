@@ -16,6 +16,7 @@ public class clickMultiplierUpgrade : UpgradeButton
 
     public clickMultiplierUpgrade(ClickerButton buttonReference)
     {
+        placeInList = 2;
         baseCost = 50;
         costMultiplier = 2f;
         upgradeRow = 2;

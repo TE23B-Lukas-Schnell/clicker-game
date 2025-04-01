@@ -1,6 +1,7 @@
 abstract public class UpgradeButton : ClickableObject
 {
     public int upgradeNumber = 1;
+    public int placeInList;
     public string upgradeDisplayName = "";
     public readonly int textSize = 30;
     public readonly int textOffset = 10;
@@ -10,15 +11,21 @@ abstract public class UpgradeButton : ClickableObject
     public float costMultiplier = 1f;
     public float currentCost;
     public ClickerButton buttonReference;
-    public float upgradeCostIncrease(float baseCost, float costMultiplier, float latestCost) 
+    public float upgradeCostIncrease(float baseCost, float costMultiplier, float latestCost)
     => (float)(baseCost + Math.Pow(costMultiplier * latestCost, 1.1f));
 
+    // the placeInTheList variable specifies which upgrade is stored in the list
+    public void RegisterUpgrade(int upgradeNumber, int placeInTheList)
+    {   
+        buttonReference.savedata[placeInTheList] = upgradeNumber;
+    }
 
     public void upgradePurchased() // båt från Kevin
     {
         buttonReference.clickValue -= currentCost;
         upgradeNumber++;
         currentCost = MathF.Round(upgradeCostIncrease(baseCost, costMultiplier, currentCost));
+        RegisterUpgrade(upgradeNumber, placeInList);
     }
 
     public void instantiateUpgrade(ClickerButton buttonReference, int upgradeRow)
@@ -26,7 +33,7 @@ abstract public class UpgradeButton : ClickableObject
         currentCost = baseCost;
         size.X = 220 + textOffset;
         size.Y = textSize * 2 + textOffset * 2;
-        position.Y = Raylib.GetScreenHeight() * upgradeRow / 6 - buttonReference.size.Y/4;
+        position.Y = Raylib.GetScreenHeight() * upgradeRow / 6 - buttonReference.size.Y / 4;
 
         if (buttonReference.position.X < Raylib.GetScreenWidth() / 2) position.X = 0;
         else position.X = Raylib.GetScreenWidth() - size.X;
