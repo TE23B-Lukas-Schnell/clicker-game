@@ -1,4 +1,5 @@
-class autoClickerUpgrade : UpgradeButton{
+class autoClickerUpgrade : UpgradeButton
+{
     public override void Update()
     {
         if (ClickedOn() && buttonReference.clickValue >= currentCost)
@@ -17,9 +18,11 @@ class autoClickerUpgrade : UpgradeButton{
     {
         placeInList = 3;
         baseCost = 60;
-        costMultiplier = 0.8f;
+        costMultiplier = 1;
         upgradeRow = 3;
         upgradeDisplayName = "Generators";
+        currentCost = GetCurrentCost(baseCost, costMultiplier, upgradeNumber);
         instantiateUpgrade(buttonReference, upgradeRow);
+        buttonReference.SpawnAutoClicker(upgradeNumber);
     }
 }

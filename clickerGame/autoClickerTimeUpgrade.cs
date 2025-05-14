@@ -7,24 +7,25 @@ class AutoClickerTimeUpgrade : UpgradeButton
             if (ClickedOn() && buttonReference.clickValue >= currentCost)
             {
                 upgradePurchased();
-                buttonReference.AutoClickerTimeUpgrade(0.9f,upgradeNumber);
+                buttonReference.AutoClickerTimeUpgrade(0.9f, upgradeNumber);
             }
         }
     }
 
     public override void Draw()
     {
-        if (buttonReference.GetAutoclickerLength() > 0)
-            drawUpgrade();
+        if (buttonReference.GetAutoclickerLength() > 0) drawUpgrade();
     }
 
     public AutoClickerTimeUpgrade(ClickerButton buttonReference)
     {
         placeInList = 6;
         baseCost = 100;
-        costMultiplier = 0.8f;
+        costMultiplier = 1f;
         upgradeRow = 6;
         upgradeDisplayName = "Gen. speed";
+        currentCost = GetCurrentCost(baseCost, costMultiplier, upgradeNumber);
         instantiateUpgrade(buttonReference, upgradeRow);
+        buttonReference.AutoClickerTimeUpgrade(0.9f, upgradeNumber);
     }
 }

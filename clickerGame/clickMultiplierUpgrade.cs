@@ -5,8 +5,8 @@ public class clickMultiplierUpgrade : UpgradeButton
         if (ClickedOn() && buttonReference.clickValue >= currentCost)
         {
             upgradePurchased();
-            buttonReference.clickMultiplier++;
         }
+        buttonReference.clickMultiplier = upgradeNumber;
     }
 
     public override void Draw()
@@ -18,9 +18,10 @@ public class clickMultiplierUpgrade : UpgradeButton
     {
         placeInList = 2;
         baseCost = 50;
-        costMultiplier = 2f;
+        costMultiplier = 4f;
         upgradeRow = 2;
         upgradeDisplayName = "Multiplier";
+        currentCost = GetCurrentCost(baseCost, costMultiplier, upgradeNumber);
         instantiateUpgrade(buttonReference, upgradeRow);
     }
 }

@@ -73,6 +73,5 @@ c:\Users\lukas.schnell\Documents\GitHub\clicker-game\clickerGame\obj\Debug\net8.
 c:\Users\lukas.schnell\Documents\GitHub\clicker-game\clickerGame\obj\Debug\net8.0\clickerGame.pdb
 c:\Users\lukas.schnell\Documents\GitHub\clicker-game\clickerGame\obj\Debug\net8.0\clickerGame.genruntimeconfig.cache
 c:\Users\lukas.schnell\Documents\GitHub\clicker-game\clickerGame\obj\Debug\net8.0\ref\clickerGame.dll
-c:\Users\lukas.schnell\Documents\GitHub\clicker-game\clickerGame\bin\Debug\net8.0\save.json
 c:\Users\lukas.schnell\Documents\GitHub\clicker-game\clickerGame\bin\Debug\net8.0\karimSave.txt
 c:\Users\lukas.schnell\Documents\GitHub\clicker-game\clickerGame\bin\Debug\net8.0\mickeSave.txt

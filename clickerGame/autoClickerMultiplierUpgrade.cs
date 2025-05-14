@@ -7,7 +7,7 @@ class AutoClickerMultiplierUpgrade : UpgradeButton
             if (ClickedOn() && buttonReference.clickValue >= currentCost)
             {
                 upgradePurchased();
-                buttonReference.AutoClickerMultiplierUpgrade(1);
+                buttonReference.AutoClickerMultiplierUpgrade(upgradeNumber);
             }
         }
     }
@@ -22,9 +22,12 @@ class AutoClickerMultiplierUpgrade : UpgradeButton
     {
         placeInList = 5;
         baseCost = 80;
-        costMultiplier = 1.3f;
+        costMultiplier = 1f;
         upgradeRow = 5;
         upgradeDisplayName = "Gen. multiplier";
+        currentCost = GetCurrentCost(baseCost, costMultiplier, upgradeNumber);
         instantiateUpgrade(buttonReference, upgradeRow);
+        buttonReference.AutoClickerMultiplierUpgrade(upgradeNumber);
     }
 }
+

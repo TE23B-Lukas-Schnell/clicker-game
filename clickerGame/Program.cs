@@ -50,7 +50,6 @@ while (!Raylib.WindowShouldClose())
 
     Raylib.DrawText("VS", (Raylib.GetScreenWidth() / 2) - 50, Raylib.GetScreenHeight() / 3 + 50, 80, Color.Black);
 
-    //this part is for debugging
     /*
     Console.Clear();
     Console.WriteLine("Karim Upgrades:");
@@ -68,31 +67,21 @@ while (!Raylib.WindowShouldClose())
 
     Raylib.EndDrawing();
 
-    if (Raylib.IsKeyDown(KeyboardKey.F2))
-    {
-        Save.LoadGame(Save.ReadSaveFile("./karimSave.txt"), karim, [
-            karimClickIncrease,
+    Save.SaveUpdate(karim,
+        [karimClickIncrease,
         karimMultiplier,
         karimAutoClicker,
         karimAutoClickerIncrease,
         karimAutoClickerMultiplier,
-        karimAutoClickerTime
-        ]);
-        Save.LoadGame(Save.ReadSaveFile("./mickeSave.txt"), mikael, [
-            mikaelClickIncrease,
+        karimAutoClickerTime],
+        mikael,
+        [mikaelClickIncrease,
         mikaelMultiplier,
         mikaelAutoClicker,
         mikaelAutoClickerIncrease,
         mikaelAutoClickerMultiplier,
-        mikaelAutoClickerTime
-        ]);
-    }
-
-    if (Raylib.IsKeyDown(KeyboardKey.F1))
-    {
-        Save.SaveGame(karim.savedata, "./karimSave.txt");
-        Save.SaveGame(mikael.savedata, "./mickeSave.txt");
-    }
+        mikaelAutoClickerTime]
+    );
 }
 
 // カリムのボートがおおきです。そしてにく。ボートにのりますとでんしゃにおります。ミカエルはにくをたべたい。

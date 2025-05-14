@@ -1,6 +1,30 @@
 class Save
 {
+    public static string message = "";
+    public static int textSize = 30;
+    public static Color textColor = new Color(255, 255, 255, 255);
+
     
+    public static void SaveUpdate(ClickerButton karim, UpgradeButton[] karimList, ClickerButton mikael, UpgradeButton[] mikaelList)
+    {
+        if (textColor.A >= 1) textColor.A--;
+        Raylib.DrawText(message, Raylib.GetScreenWidth()/3, Raylib.GetScreenHeight() - textSize * 2, textSize, new Color(0, 255, 0, (int)textColor.A));
+        if (Raylib.IsKeyDown(KeyboardKey.F1))
+        {
+            SaveGame(karim.savedata, "./karimSave.txt");
+            SaveGame(mikael.savedata, "./mickeSave.txt");
+            message = "karim and mikael saved";
+            textColor = new Color(0, 255, 0, 255);
+        }
+
+        if (Raylib.IsKeyDown(KeyboardKey.F2))
+        {
+            LoadGame(ReadSaveFile("./karimSave.txt"), karim, karimList);
+            LoadGame(ReadSaveFile("./mickeSave.txt"), mikael, mikaelList);
+            message = "karim and mikael loaded";
+            textColor = new Color(0, 0, 255, 255);
+        }
+    }
 
     public static void SaveGame(int[] content, string filePath)
     {
@@ -64,5 +88,4 @@ class Save
             upgrades[i].upgradeNumber = savedata[i];
         }
     }
-
 }

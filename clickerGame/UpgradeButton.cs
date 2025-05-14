@@ -1,6 +1,6 @@
 abstract public class UpgradeButton : ClickableObject
 {
-    public int upgradeNumber = 1;
+    public int upgradeNumber = 0;
     public int placeInList;
     public string upgradeDisplayName = "";
     public readonly int textSize = 30;
@@ -11,12 +11,13 @@ abstract public class UpgradeButton : ClickableObject
     public float costMultiplier = 1f;
     public float currentCost;
     public ClickerButton buttonReference;
-    public float upgradeCostIncrease(float baseCost, float costMultiplier, float latestCost)
-    => (float)(baseCost + Math.Pow(costMultiplier * latestCost, 1.1f));
 
+    public float GetCurrentCost(float baseCost, float costMultiplier, int upgradeNumber) => 
+    (float)(baseCost + costMultiplier * Math.Pow(upgradeNumber * 2, 1.2f));
+    
     // the placeInTheList variable specifies which upgrade is stored in the list
     public void RegisterUpgrade(int upgradeNumber, int placeInTheList)
-    {   
+    {
         buttonReference.savedata[placeInTheList] = upgradeNumber;
     }
 
@@ -24,7 +25,7 @@ abstract public class UpgradeButton : ClickableObject
     {
         buttonReference.clickValue -= currentCost;
         upgradeNumber++;
-        currentCost = MathF.Round(upgradeCostIncrease(baseCost, costMultiplier, currentCost));
+        currentCost = MathF.Round(GetCurrentCost(baseCost, costMultiplier, upgradeNumber));
         RegisterUpgrade(upgradeNumber, placeInList);
     }
 
@@ -40,6 +41,7 @@ abstract public class UpgradeButton : ClickableObject
         this.buttonReference = buttonReference;
         gamelist.Add(this);
     }
+
     public void drawUpgrade()
     {
         Raylib.DrawRectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y, new Color(255, 255, 255));

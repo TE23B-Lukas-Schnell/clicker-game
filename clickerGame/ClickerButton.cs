@@ -20,10 +20,12 @@ public class ClickerButton : ClickableObject
     /// the seventh value is the generator speed upgrade upgradeNumber
     /// </summary>
     public int[] savedata = [0, 0, 0, 0, 0, 0, 0];
+    // det är en array för att det kommer inte läggas till fler värden under runtime
+
 
     public float CalculateValuePerClick(float clickIncrease, float clickMultiplier)
     {
-        return MathF.Round(clickIncrease * MathF.Pow(clickMultiplier, 1.2f));
+        return MathF.Round(clickIncrease * MathF.Pow(clickMultiplier, 1.2f) + 1);
     }
 
     public void DrawButton(Texture2D texture)
@@ -89,21 +91,21 @@ public class ClickerButton : ClickableObject
     {
         for (int i = 0; i < AutoClickersList.Count; i++)
         {
-            AutoClickersList[i].autoClickerclickIncrease += increaseValue;
+            AutoClickersList[i].autoClickerclickIncrease = increaseValue;
         }
     }
     public void AutoClickerMultiplierUpgrade(float multiplierValue)
     {
         for (int i = 0; i < AutoClickersList.Count; i++)
         {
-            AutoClickersList[i].autoClickerclickMultiplier += multiplierValue;
+            AutoClickersList[i].autoClickerclickMultiplier = multiplierValue;
         }
     }
     public void AutoClickerTimeUpgrade(float timeDecreaseCoefficient, float timeDecreaseExponent)
     {
         for (int i = 0; i < AutoClickersList.Count; i++)
         {
-            AutoClickersList[i].timeBetweenClicks *= MathF.Pow(timeDecreaseCoefficient, timeDecreaseExponent);
+            AutoClickersList[i].timeBetweenClicks = MathF.Pow(timeDecreaseCoefficient, timeDecreaseExponent);
         }
     }
 
@@ -127,7 +129,6 @@ public class ClickerButton : ClickableObject
         DrawButton(texture);
         Raylib.DrawText($"{clickValueName}", (int)(position.X + size.X * 0.3f), (int)position.Y - textSize * 2, textSize, Color.Black);
         Raylib.DrawText($"{clickValue}", (int)(position.X + size.X * 0.3f), (int)position.Y - textSize, textSize, Color.Black);
-        // loops through all autoclickers
         for (int i = 0; i < AutoClickersList.Count; i++)
         {
             AutoClickersList[i].Draw();
